@@ -1,0 +1,49 @@
+@font-face {
+  font-family: "Fut-Light";
+  src: url("../fonts/FuturaPTLight.otf");
+}
+@font-face {
+  font-family: "Jub-Light";
+  src: url("../fonts/JubilatLight.otf");
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap");
+
+:root {
+  --background-color-1: #d1b6bc;
+  --background-color-2: #e9e5e2;
+  --background-color-3: #fbf8f8;
+  --background-color-4: #e9e5e2;
+  --background-color-5: #dfd7cc;
+  --color-1: #ccc0b1;
+  --color-2: #beb3b7;
+  --color-3: #d1b6bb;
+  --color-4: #51596b;
+  --color-5: #3f3d56;
+  --success-color: #8cfed3;
+  --error-color: #ff8c8c;
+  --montserat: "Montserrat", sans-serif;
+  --roboto: "Roboto", sans-serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0 auto;
+  background-color: var(--background-color-3);
+}
+
+#root {
+  max-width: 192rem;
+  /* padding: 0 2rem; */
+  /* border: 1px solid red; */
+  margin: 0 auto;
+}

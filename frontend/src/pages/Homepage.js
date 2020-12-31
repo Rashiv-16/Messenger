@@ -1,0 +1,122 @@
+import homepageIllustration from '../img/homepage-illustration.svg'
+import emailIcon from '../img/icon-email.svg'
+import passwordIcon from '../img/icon-password.svg'
+import usernameIcon from '../img/icon-username.svg'
+
+import styled from 'styled-components'
+
+import InputField from '../components/InputField'
+
+const Main = styled.main`
+    width: 100%;
+    height: 100vh;
+    min-height: max-content;
+    position: relative;
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-content: space-around;
+    align-items: center;
+    /* padding: 2rem; */
+`
+
+const IllustrationContainer = styled.div`
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+`
+
+const FormContainer = styled.div`
+    /* border: 1px solid red; */
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    max-width: 33rem;
+    min-width: 33rem;
+    margin: 2rem;
+`
+
+
+const MainIllustration = styled.img`
+    /* position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%); */
+    width: 100%;
+    height: 100%;
+    /* object-position:  */
+    /* border: 1px solid red; */
+`
+
+const Form = styled.form`
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 32.8rem;
+`
+
+const LoginButton = styled.button`
+    font-family: var(--montserat);
+    margin-top: 0.8rem;
+    margin-bottom: 2rem;
+    font-size: 1.6rem;
+    width: 100%;
+    height: 4.8rem;
+    max-width: 32.8rem;
+    color: var(--color-4);
+    background-color: var(--color-2);
+    border: none;
+    cursor: pointer;
+`
+
+const NoAccount = styled.p`
+    font-family: var(--roboto);
+    margin-bottom: 2rem;
+    color: var(--color-2);
+    font-size: 1rem;
+`
+
+const SignUpLink = styled.a`
+    font-family: var(--montserat);
+    width: 100%;
+    max-width: 32.8rem;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-5);
+    color: var(--color-2);
+    width: 100%;
+    font-size: 1.6rem;
+    height: 4.8rem;
+`
+
+
+const Homepage = () => {
+    return(
+        <Main>
+            <IllustrationContainer>
+                <MainIllustration src={homepageIllustration} alt=""/>
+            </IllustrationContainer>
+            <FormContainer>
+                <Form>
+                    <InputField type='text' placeholder='Email/Username' icon={usernameIcon} />
+                    <InputField type='password' placeholder='Password' icon={passwordIcon} />
+                    <LoginButton type="submit">LOGIN</LoginButton>
+                </Form>
+                <NoAccount>Don't have an account?</NoAccount>
+                <SignUpLink href="#">SIGNUP</SignUpLink>
+            </FormContainer>
+        </Main>
+    )
+}
+
+export default Homepage
