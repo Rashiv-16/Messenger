@@ -1,24 +1,24 @@
+import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 import homepageIllustration from '../img/homepage-illustration.svg'
 import emailIcon from '../img/icon-email.svg'
 import passwordIcon from '../img/icon-password.svg'
 import usernameIcon from '../img/icon-username.svg'
 
-import styled from 'styled-components'
 
 import InputField from '../components/InputField'
 
 const Main = styled.main`
     width: 100%;
-    height: 100vh;
-    min-height: max-content;
-    position: relative;
+    min-height: 100vh;
+    height: max-content;
     /* border: 1px solid blue; */
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
     align-content: space-around;
     align-items: center;
-    /* padding: 2rem; */
+    padding: 2rem;
 `
 
 const IllustrationContainer = styled.div`
@@ -27,7 +27,8 @@ const IllustrationContainer = styled.div`
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    margin: 2rem;
+    margin-bottom: 5.6rem;
+    min-width: 32.8rem;
 `
 
 const FormContainer = styled.div`
@@ -39,7 +40,6 @@ const FormContainer = styled.div`
     flex-grow: 1;
     max-width: 33rem;
     min-width: 33rem;
-    margin: 2rem;
 `
 
 
@@ -75,6 +75,7 @@ const LoginButton = styled.button`
     background-color: var(--color-2);
     border: none;
     cursor: pointer;
+    border-radius: 0.4rem;
 `
 
 const NoAccount = styled.p`
@@ -84,7 +85,7 @@ const NoAccount = styled.p`
     font-size: 1rem;
 `
 
-const SignUpLink = styled.a`
+const SignUpLink = styled(Link)`
     font-family: var(--montserat);
     width: 100%;
     max-width: 32.8rem;
@@ -97,6 +98,8 @@ const SignUpLink = styled.a`
     width: 100%;
     font-size: 1.6rem;
     height: 4.8rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
 `
 
 
@@ -113,7 +116,7 @@ const Homepage = () => {
                     <LoginButton type="submit">LOGIN</LoginButton>
                 </Form>
                 <NoAccount>Don't have an account?</NoAccount>
-                <SignUpLink href="#">SIGNUP</SignUpLink>
+                <SignUpLink to='/signup'>SIGNUP</SignUpLink>
             </FormContainer>
         </Main>
     )
