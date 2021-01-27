@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import homepageIllustration from "../img/homepage-illustration.svg";
-import emailIcon from "../img/icon-email.svg";
 import passwordIcon from "../img/icon-password.svg";
 import usernameIcon from "../img/icon-username.svg";
 import fbIcon from "../img/icon-fb.svg";
@@ -80,7 +79,7 @@ const LoginButton = styled.button`
 `;
 
 const SocialLoginContainer = styled.div`
-  margin-bottom: 3.2rem;
+  margin-bottom: 4.8rem;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
@@ -150,16 +149,13 @@ const Homepage = () => {
         </Form>
         <SocialLoginContainer>
           <SocialLogin href="#">
-            {" "}
-            <img src={fbIcon} alt="" />{" "}
+            <img src={fbIcon} alt="" />
           </SocialLogin>
           <SocialLogin href="#">
-            {" "}
-            <img src={twitterIcon} alt="" />{" "}
+            <img src={twitterIcon} alt="" />
           </SocialLogin>
           <SocialLogin href="#">
-            {" "}
-            <img src={googleIcon} alt="" />{" "}
+            <img src={googleIcon} alt="" />
           </SocialLogin>
         </SocialLoginContainer>
         <NoAccount>Don't have an account?</NoAccount>
