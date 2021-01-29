@@ -4,7 +4,6 @@ import Signup from "./pages/Signup";
 import ConfirmationPage from "./pages/ConfirmationPage";
 import AllSetPage from "./pages/AllSetPage";
 import MessengerPage from "./pages/MessengerPage";
-import ChatPage from "./pages/ChatPage";
 
 import "./css/app.css";
 

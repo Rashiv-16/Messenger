@@ -79,7 +79,7 @@ const statusColor = {
   unavailable: "var(--unavailable-color)",
 };
 
-const ChatNames = ({ chatnames }) => {
+const ChatNames = ({ chatnames, setToggleChatHandler }) => {
   if (chatnames.length === 0)
     return (
       <ChatNamesSection
@@ -92,9 +92,9 @@ const ChatNames = ({ chatnames }) => {
         <EmptyListMsg>Your conversation list appears here.</EmptyListMsg>
       </ChatNamesSection>
     );
-  const names = chatnames.map((chatname) => {
+  const names = chatnames.map((chatname, index) => {
     return (
-      <NameContainer>
+      <NameContainer key={index} onClick={() => setToggleChatHandler(true)}>
         <ProfileContainer>
           <ProfilePicture />
           <ProfileName>{chatname.title}</ProfileName>

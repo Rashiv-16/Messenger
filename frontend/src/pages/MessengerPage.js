@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import styled from "styled-components";
 
 import ChatPage from "./ChatPage";
@@ -32,8 +34,8 @@ const Chat = styled.section`
   max-width: calc(192rem - 50rem);
   width: 100%;
   align-self: stretch;
-  height: max-content;
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
   /* border: 1px solid blue; */
   background-color: var(--background-color-5);
 `;
@@ -59,15 +61,27 @@ const AddButton = styled.button`
 `;
 
 const MessengerPage = ({ chatnames }) => {
+  const [toggleChat, setToggleChat] = useState(false);
+
+  const setToggleChatHandler = (toggle) => {
+    toggle ? setToggleChat(true) : setToggleChat(false);
+  };
+
   return (
     <Main>
       <ChatList className="chat-list">
         <Namebar />
-        <ChatNames chatnames={chatnames} />
-        <AddButton>+</AddButton>
+        <ChatNames
+          chatnames={chatnames}
+          setToggleChatHandler={setToggleChatHandler}
+        />
+        <AddButton title="Start a new conversation">+</AddButton>
       </ChatList>
       <Chat className="chat">
-        <ChatPage />
+        <ChatPage
+          toggleChat={toggleChat}
+          setToggleChatHandler={setToggleChatHandler}
+        />
       </Chat>
     </Main>
   );
