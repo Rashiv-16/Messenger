@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
 import homepageIllustration from "../img/homepage-illustration.svg";
 import passwordIcon from "../img/icon-password.svg";
 import usernameIcon from "../img/icon-username.svg";
@@ -8,6 +9,8 @@ import twitterIcon from "../img/icon-twitter.svg";
 import googleIcon from "../img/icon-google.svg";
 
 import InputField from "../components/InputField";
+
+import AuthButton from "../utils/googleAuthLoad";
 
 const Main = styled.main`
   width: 100%;
@@ -87,7 +90,7 @@ const SocialLoginContainer = styled.div`
   width: 80%;
 `;
 
-const SocialLogin = styled.a`
+const SocialLogin = styled.button`
   width: 5.6rem;
   height: 5.6rem;
   display: flex;
@@ -154,12 +157,13 @@ const Homepage = () => {
           <SocialLogin href="#">
             <img src={twitterIcon} alt="" />
           </SocialLogin>
-          <SocialLogin href="#">
+          <SocialLogin>
             <img src={googleIcon} alt="" />
           </SocialLogin>
         </SocialLoginContainer>
         <NoAccount>Don't have an account?</NoAccount>
         <SignUpLink to="/signup">SIGNUP</SignUpLink>
+        <AuthButton />
       </FormContainer>
     </Main>
   );
