@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 import defaultIllustration from "../img/empty-chat-illustration.svg";
+import ChatScreenTitleBar from "../components/ChatScreenTitleBar";
+import ChatScreenMessaging from "../components/ChatScreenMessaging";
 
 const DefaultScreen = styled.section`
   width: 100%;
@@ -14,6 +16,8 @@ const DefaultScreen = styled.section`
 
   overflow-y: scroll;
   scrollbar-width: 0;
+
+  user-select: none;
 
   &::-webkit-scrollbar {
     display: none;
@@ -82,28 +86,40 @@ const Line = styled.span`
   flex-grow: 2;
 `;
 
+const ChatScreen = styled.div`
+  /* border: 1px solid green; */
+  height: 100%;
+`;
+
 const ChatPage = ({ toggleChat, setToggleChatHandler }) => {
-  if (!toggleChat) {
-    return (
-      <DefaultScreen>
-        <DefaultIllustrationContainer>
-          <DefaultIllustration src={defaultIllustration} />
-        </DefaultIllustrationContainer>
-        <DefaultTextContainer>
-          <DefaultTextInnerContainer>
-            <DefaultText>Click on name to open up a chat</DefaultText>
-            <DefaultTextGroup>
-              <Line />
-              <DefaultText>or</DefaultText>
-              <Line />
-            </DefaultTextGroup>
-            <DefaultText>Send an invitation to add people</DefaultText>
-          </DefaultTextInnerContainer>
-        </DefaultTextContainer>
-      </DefaultScreen>
-    );
-  }
-  return <h1 onClick={() => setToggleChatHandler(false)}>Chat</h1>;
+  const chatScreen = (
+    <ChatScreen>
+      <ChatScreenTitleBar setToggleChatHandler={setToggleChatHandler} />
+      <ChatScreenMessaging />
+    </ChatScreen>
+  );
+
+  const defaultScreen = (
+    <DefaultScreen>
+      <DefaultIllustrationContainer>
+        <DefaultIllustration draggable="false" src={defaultIllustration} />
+      </DefaultIllustrationContainer>
+      <DefaultTextContainer>
+        <DefaultTextInnerContainer>
+          <DefaultText>Click on name to open up a chat</DefaultText>
+          <DefaultTextGroup>
+            <Line />
+            <DefaultText>or</DefaultText>
+            <Line />
+          </DefaultTextGroup>
+          <DefaultText>Send an invitation to add people</DefaultText>
+        </DefaultTextInnerContainer>
+      </DefaultTextContainer>
+    </DefaultScreen>
+  );
+
+  if (!toggleChat) return defaultScreen;
+  return chatScreen;
 };
 
 export default ChatPage;

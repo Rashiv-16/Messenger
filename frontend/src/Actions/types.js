@@ -1,0 +1,5 @@
+export const GOOGLE_SIGN_IN = "GOOGLE_SIGN_IN";
+export const GOOGLE_SIGN_OUT = "GOOGLE_SIGN_OUT";
+export const CURRENT_LOGGED_IN_USER = "CURRENT_LOGGED_IN_USER";
+export const FRIEND_LIST = "FRIEND_LIST";
+export const CURRENT_CHAT = "CURRENT_CHAT";

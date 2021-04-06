@@ -1,10 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import styled from "styled-components";
 
 import ChatPage from "./ChatPage";
 import ChatNames from "../components/ChatNames";
 import Namebar from "../components/Namebar";
+
+//Contexts
+import { SocketContext } from "../context/socket";
+
+// import axios from "axios";
+import { connect } from "react-redux";
+
+import { useDispatch } from "react-redux";
+
+import { currentLoggedInUser } from "../Actions";
+
+import isLoggedin from "../utils/isLoggedIn";
 
 const Main = styled.main`
   width: 100%;
@@ -60,17 +72,42 @@ const AddButton = styled.button`
   align-items: center;
 `;
 
-const MessengerPage = ({ chatnames }) => {
+const MessengerPage = ({ chatnames }, props) => {
   const [toggleChat, setToggleChat] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(false);
+  const [loginStatus, setLoginStatus] = useState(null);
+  const socket = useContext(SocketContext);
 
   const setToggleChatHandler = (toggle) => {
     toggle ? setToggleChat(true) : setToggleChat(false);
   };
+  const setToggleMenuHandler = (toggle) => {
+    toggle ? setToggleMenu(true) : setToggleMenu(false);
+  };
+  const dispatch = useDispatch();
 
-  return (
+  const loginStatusHandler = async () => {
+    const data = await isLoggedin();
+    if (data) setLoginStatus(true);
+    else setLoginStatus(false);
+  };
+  useEffect(() => {
+    loginStatusHandler();
+    dispatch(currentLoggedInUser());
+    if (loginStatus) socket.connect();
+  }, [loginStatus]);
+
+  // design components for loginFalse
+  // dsign loading page for loginNull
+  const loginFalse = <h3>You need to login first!</h3>;
+  const loginNull = <h3>Loading...</h3>;
+  const loginTrue = (
     <Main>
       <ChatList className="chat-list">
-        <Namebar />
+        <Namebar
+          toggleMenu={toggleMenu}
+          setToggleMenuHandler={setToggleMenuHandler}
+        />
         <ChatNames
           chatnames={chatnames}
           setToggleChatHandler={setToggleChatHandler}
@@ -85,6 +122,17 @@ const MessengerPage = ({ chatnames }) => {
       </Chat>
     </Main>
   );
+
+  if (loginStatus === null) return loginNull;
+  if (loginStatus) return loginTrue;
+  return loginFalse;
 };
 
-export default MessengerPage;
+const mapStateToProps = (state) => {
+  return {
+    loggedInUser: state.loggedInUser,
+    friendList: state.friendList,
+  };
+};
+
+export default connect(mapStateToProps, { currentLoggedInUser })(MessengerPage);

@@ -8,9 +8,12 @@ import fbIcon from "../img/icon-fb.svg";
 import twitterIcon from "../img/icon-twitter.svg";
 import googleIcon from "../img/icon-google.svg";
 
+// import axios from "axios";
+
 import InputField from "../components/InputField";
 
-import AuthButton from "../utils/googleAuthLoad";
+import { currentLoggedInUser } from "../Actions";
+import { connect } from "react-redux";
 
 const Main = styled.main`
   width: 100%;
@@ -23,6 +26,7 @@ const Main = styled.main`
   align-content: space-around;
   align-items: center;
   padding: 2rem;
+  position: relative;
 `;
 
 const IllustrationContainer = styled.div`
@@ -47,10 +51,6 @@ const FormContainer = styled.div`
 `;
 
 const MainIllustration = styled.img`
-  /* position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translate(0, -50%); */
   width: 100%;
   height: 100%;
   /* object-position:  */
@@ -90,7 +90,7 @@ const SocialLoginContainer = styled.div`
   width: 80%;
 `;
 
-const SocialLogin = styled.button`
+const SocialLogin = styled.a`
   width: 5.6rem;
   height: 5.6rem;
   display: flex;
@@ -99,6 +99,7 @@ const SocialLogin = styled.button`
   align-items: center;
   border: 1px solid var(--color-2);
   border-radius: 50%;
+  cursor: pointer;
 
   & > img {
     width: 30%;
@@ -130,9 +131,33 @@ const SignUpLink = styled(Link)`
   cursor: pointer;
 `;
 
-const Homepage = () => {
+const PopUp = styled.div`
+  position: absolute;
+  width: 100%;
+  background-color: hsl(0, 0%, 30%);
+  color: var(--color-1);
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0 1rem 0;
+  margin-bottom: 2rem;
+  top: 0;
+
+  & > p {
+    font-family: var(--roboto);
+    font-size: 1.6rem;
+    text-align: center;
+  }
+`;
+
+const Homepage = (props) => {
   return (
     <Main>
+      {/* Remove PopUp component after incorporating other login oauth and local login */}
+      <PopUp className="pop-up">
+        <p>Login via Google Auth is permitted only</p>
+      </PopUp>
       <IllustrationContainer>
         <MainIllustration src={homepageIllustration} alt="" />
       </IllustrationContainer>
@@ -151,22 +176,28 @@ const Homepage = () => {
           <LoginButton type="submit">LOGIN</LoginButton>
         </Form>
         <SocialLoginContainer>
-          <SocialLogin href="#">
+          <SocialLogin onClick={() => "yo"}>
             <img src={fbIcon} alt="" />
           </SocialLogin>
-          <SocialLogin href="#">
+          <SocialLogin onClick={() => "yo"}>
             <img src={twitterIcon} alt="" />
           </SocialLogin>
-          <SocialLogin>
+          <SocialLogin href="/api/auth/google">
             <img src={googleIcon} alt="" />
           </SocialLogin>
         </SocialLoginContainer>
         <NoAccount>Don't have an account?</NoAccount>
         <SignUpLink to="/signup">SIGNUP</SignUpLink>
-        <AuthButton />
+        {/* <a href="/api/auth/google">Google Sign In</a> */}
       </FormContainer>
     </Main>
   );
 };
 
-export default Homepage;
+const mapStateToProps = (state) => {
+  return state;
+};
+
+export default connect(mapStateToProps, {
+  currentLoggedInUser,
+})(Homepage);

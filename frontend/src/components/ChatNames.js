@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { currentChat } from "../Actions";
+import { useDispatch } from "react-redux";
 
 const ChatNamesSection = styled.section`
   width: 100%;
-  height: calc(100% - 7rem);
+  height: calc(100% - 9rem);
   padding: 5rem 5rem 0 5rem;
   /* border: 1px solid red; */
   overflow-y: scroll;
@@ -53,7 +56,7 @@ const ProfilePicture = styled.div`
   height: 5.6rem;
   border-radius: 60%;
   background-color: whitesmoke;
-  margin-right: 2rem;
+  margin-right: 1.6rem;
 `;
 
 const ProfileName = styled.h5`
@@ -64,6 +67,7 @@ const ProfileName = styled.h5`
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 50%;
+  /* border: 1px solid red; */
 `;
 const ProfileStatus = styled.h5`
   width: 0.8rem;
@@ -80,6 +84,7 @@ const statusColor = {
 };
 
 const ChatNames = ({ chatnames, setToggleChatHandler }) => {
+  const dispatch = useDispatch();
   if (chatnames.length === 0)
     return (
       <ChatNamesSection
@@ -94,7 +99,14 @@ const ChatNames = ({ chatnames, setToggleChatHandler }) => {
     );
   const names = chatnames.map((chatname, index) => {
     return (
-      <NameContainer key={index} onClick={() => setToggleChatHandler(true)}>
+      <NameContainer
+        key={index}
+        onClick={() => {
+          setToggleChatHandler(false);
+          setToggleChatHandler(true);
+          dispatch(currentChat({ name: chatname.title }));
+        }}
+      >
         <ProfileContainer>
           <ProfilePicture />
           <ProfileName>{chatname.title}</ProfileName>
@@ -109,4 +121,4 @@ const ChatNames = ({ chatnames, setToggleChatHandler }) => {
   return <ChatNamesSection>{names}</ChatNamesSection>;
 };
 
-export default ChatNames;
+export default connect(null, { currentChat })(ChatNames);

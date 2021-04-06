@@ -1,5 +1,10 @@
 import { combineReducers } from "redux";
+import googleAuthReducer from "./googleAuthReducer";
+import currentLoggedInUserReducer from "./currentLoggedInUserReducer";
+import currentChatReducer from "./currentChatReducer";
 
 export default combineReducers({
-  changeMe: () => "yolo",
+  googleAuthReducer,
+  loggedInUser: currentLoggedInUserReducer,
+  currentChat: currentChatReducer,
 });

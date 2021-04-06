@@ -4,8 +4,10 @@ import Signup from "./pages/Signup";
 import ConfirmationPage from "./pages/ConfirmationPage";
 import AllSetPage from "./pages/AllSetPage";
 import MessengerPage from "./pages/MessengerPage";
+import Chat from "./pages/Chat.js";
 
 import "./css/app.css";
+// import "./components/GoogleAuthButton";
 
 const chatnames = [
   { title: "Ivan", status: "available" },
@@ -41,6 +43,9 @@ function App() {
       </Route>
       <Route path="/messenger">
         <MessengerPage chatnames={chatnames} />
+      </Route>
+      <Route path="/chat">
+        <Chat />
       </Route>
     </Switch>
   );

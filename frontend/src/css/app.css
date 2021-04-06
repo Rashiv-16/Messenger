@@ -18,8 +18,12 @@
   --color-1: #ccc0b1;
   --color-2: #beb3b7;
   --color-3: #d1b6bb;
-  --color-4: #51596b;
-  --color-5: #3f3d56;
+  --color-4: #51596c;
+  --color-5: #3f3d57;
+  --color-menu: #535a6a;
+  --color-menu: #53506d;
+  --color-subMenu: #575b66;
+  --color-subMenu: #54526b;
   --success-color: #8cfed3;
   --error-color: #ff8c8c;
   --unavailable-color: #dcdcdc;
@@ -49,6 +53,13 @@ body {
   min-height: max-content;
   /* border: 1px solid red; */
   margin: 0 auto;
+}
+
+@media screen and (max-width: 1225px) {
+  .pop-up {
+    position: relative !important;
+    top: unset !important;
+  }
 }
 
 /* 
