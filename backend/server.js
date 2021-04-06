@@ -15,7 +15,7 @@ import { Server } from "socket.io";
 import sgMail from "@sendgrid/mail";
 
 // sgMail.setApiKey(
-//   "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"
+//   process.env.SENDGRID_API_KEY
 // );
 
 // const msg = {
@@ -42,7 +42,7 @@ connectDB();
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
-const key1 = "isuddibsubasuvs6d1651sd6516oi3j266*(HGVFCF$#YBHBJN651Bfg#$^";
+const key1 = process.env.COOKIE_SESSION_KEY;
 
 const cookieSessionVariable = cookieSession({
   maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -119,13 +119,26 @@ app.post("/api/auth/google/add", (req, res) => {
 });
 
 const friendListHandler = async (req, res) => {
-  const currentUser = req.user._id;
-  const friends = await Friend.findOne({ profile_id: currentUser });
-  const stuff = friends.friends.map(async ({ user_id }) => {
-    const person = await User.findById(user_id);
-    return await person;
-  });
-  stuff.then((data) => console.log(data)).catch((e) => console.log(e));
+  try {
+    const currentUser = req.user._id;
+    const friends = await Friend.findOne({ profile_id: currentUser });
+
+    const friendList = [];
+    friends.friends.forEach(async ({ user_id }) => {
+      const person = await User.findById(user_id);
+      person.then(
+        (data) => {
+          friendList.push(data);
+          console.log(data);
+        },
+        (e) => {
+          console.log(e);
+        }
+      );
+    });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 //get friend list

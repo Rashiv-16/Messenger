@@ -9,7 +9,7 @@ passport.use(
     {
       clientID:
         "383691740409-pfqj2931ruvhb4mj7o2k7cfgk37lgd9i.apps.googleusercontent.com",
-      clientSecret: "UvpfUfUqkB98Utlofe1B7qih",
+      clientSecret: process.env.GOOGLE_SECRET_CLIENT_SECRET,
       callbackURL: "/api/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
